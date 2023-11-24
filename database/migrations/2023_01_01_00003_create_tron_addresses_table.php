@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use PavloDotDev\LaravelTronModule\Models\TronWallet;
+use Illuminate\Database\Query\Expression;
 
 return new class extends Migration {
     public function up(): void
@@ -21,7 +22,7 @@ return new class extends Migration {
             $table->timestamp('sync_at')->nullable();
             $table->boolean('activated')->nullable();
             $table->decimal('balance', 20, 6)->nullable();
-            $table->json('trc20')->default('[]');
+            $table->json('trc20')->default(new Expression('(JSON_ARRAY())'));
             $table->json('account')->nullable();
             $table->json('account_resources')->nullable();
             $table->timestamps();
